@@ -1,5 +1,5 @@
 
-# calisthenics-tracker-api
+# Stenos (API)
 
 This is the api for a fullstack MERN app. This
  webapp allows a user to track what calisthenics skills they
