@@ -16,7 +16,7 @@ exports.read = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    const { name, password } = req.body
+    const { name, password, sex, athlete, experience } = req.body
     console.log(req.user)
 
     User.findOne({ _id: req.user._id}, (err, user) => {
@@ -25,12 +25,15 @@ exports.update = (req, res) => {
                 error: 'User not found'
             })
         }
-        if(!name) {
+        if(!sex || !name || !athlete || !experience) {
             return res.status(400).json({
-                error: 'Name is required'
+                error: 'These fields are required'
             })
         } else {
-            user.name = name
+            user.name = name,
+            user.sex = sex,
+            user.athlete = athlete,
+            user.experience = experience
         }
         if(password) {
             if(password.length < 6) {

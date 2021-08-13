@@ -6,6 +6,24 @@ require('dotenv').config()
 //starting app
 const app = express()
 
+//THIS CODE WORKS PERFECTLY FINE
+
+// var API_KEY = '2d52391faceba52b385d9302752fc66b-6ae2ecad-f9858107';
+// var DOMAIN = 'exercisemaphub.com';
+// var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
+
+// const data = {
+//   from: 'Daniel <daniel@exercisemaphub.com>',
+//   to: 'ventura.daniel36@gmail.com',
+//   subject: 'Hello',
+//   text: 'Testing some Mailgun awesomeness!'
+// };
+
+// mailgun.messages().send(data, (error, body) => {
+//   console.log(error);
+// });
+
+
 //connect to mongo
 mongoose
     .connect(process.env.DATABASE, {

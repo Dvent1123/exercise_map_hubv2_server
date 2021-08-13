@@ -26,15 +26,24 @@ exports.signup = (req, res) => {
 
     let newUser = new User({name, email, password, exercises})
 
-    newUser.save((err, success) => {
+    newUser.save((err, data) => {
+        console.log('it makes it to the user')
+        console.log(data)
+
         if(err){
             return res.status(400).json({
                 error: err
             })
         }
     
+
+
+        const token = jwt.sign({_id: data._id}, process.env.JWT_SECRET, {expiresIn: '7d'})
+        const {_id, name, email, role} = data
+
         res.json({
-            message: 'Signup success! Please sign in'
+            token,
+            user: {_id, name, email, role}        
         })
     })
 }

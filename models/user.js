@@ -15,6 +15,28 @@ const userSchema = new mongoose.Schema({
         unique: true,
         lowercase: true
     },
+    //M or F
+    sex: {
+        type: String,
+        required: true,
+        default: "M"
+    },
+    //power, oly, cali, other
+    typeOfAthlete: {
+        type: String,
+        required: true,
+        default: "power"
+    },
+    experience: {
+        type: String,
+        required: true,
+        default: "beginner"
+    },
+    weight: {
+        type: Number,
+        required: true,
+        default: 100
+    },
     exercises: {
         type: Array,
     },
