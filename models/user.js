@@ -27,11 +27,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: "power"
     },
-    experience: {
-        type: String,
-        required: true,
-        default: "beginner"
-    },
     weight: {
         type: Number,
         required: true,
@@ -39,6 +34,9 @@ const userSchema = new mongoose.Schema({
     },
     exercises: {
         type: Array,
+    },
+    personalRecords: {
+        type: Array
     },
     hashed_password: {
         type: String,
