@@ -1,6 +1,7 @@
 const { UserRefreshClient } = require('google-auth-library')
 const User = require('../models/user')
-let personalRecordsModule = require('../data/powerdataM')
+let personalRecordsModuleMale = require('../data/powerdataM')
+let personalRecordsModuleFemale = require('../data/powerdataF')
 
 exports.read = (req, res) => {
     const userId = req.params.id
@@ -59,8 +60,14 @@ exports.update = (req, res) => {
 
 exports.athlete = (req, res) => {
     const { sex, type: athlete, weight } = req.body
-    const personalRecords = personalRecordsModule.powerdataM
-    console.log(sex, athlete)
+    //here change if personalRecords are either dataM or dataF based on sex
+    let personalRecords = []
+    if(sex === 'M'){
+        personalRecords = personalRecordsModuleMale.powerdataM
+    } else{
+        personalRecords = personalRecordsModuleFemale.powerdataF
+    }
+    console.log(personalRecords)
 
     User.findOne({ _id: req.user._id}, (err, user) => {
         if(err || !user) {
@@ -79,7 +86,7 @@ exports.athlete = (req, res) => {
             // personalRecords[x].id
 
             personalRecords.forEach( record => {
-                if(!containsObject(record, personalRecords) && record.id === weight){
+                if(!containsObject(record.id, user.personalRecords, sex) && record.id === weight){
                     user.personalRecords.push(record)
                 }
             })
@@ -102,10 +109,14 @@ exports.athlete = (req, res) => {
 }
 
 // Function to check is an object is inside of the array or not
-function containsObject(id, list) {
+function containsObject(id, list, sex) {
     var i;
     for (i = 0; i < list.length; i++) {
-        if (list[i].id === id) {
+        console.log("list[i].id: ", list[i].id)
+        console.log("id: ", id)
+        console.log("list[i].sex", list[i].sex)
+        console.log("sex: ", sex)
+        if (list[i].id === id && list[i].sex === sex) {
             return true;
         }
     }
@@ -115,6 +126,8 @@ function containsObject(id, list) {
 
 exports.unlock = (req, res) => {
     let skillsArray = req.body
+
+    console.log(skillsArray)
 
     //NOTES
     //this one kind of works, would have to pass all the exercises back from front end with exercises unlocked and updated
@@ -127,7 +140,7 @@ exports.unlock = (req, res) => {
         }
     
         res.json({
-            message: 'Skill Unlocked!'
+            message: raw
         })
     })
 }
