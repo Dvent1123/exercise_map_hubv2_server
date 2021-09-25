@@ -59,7 +59,12 @@ exports.update = (req, res) => {
 }
 
 exports.athlete = (req, res) => {
-    const { sex, type: athlete, weight } = req.body
+    let { sex, type: athlete, weight } = req.body
+    if(weight === 100 && sex === 'M'){
+        weight = 114
+    } else if(weight === 100 && sex === 'F'){
+        weight = 97
+    }
     //here change if personalRecords are either dataM or dataF based on sex
     let personalRecords = []
     if(sex === 'M'){
@@ -112,10 +117,6 @@ exports.athlete = (req, res) => {
 function containsObject(id, list, sex) {
     var i;
     for (i = 0; i < list.length; i++) {
-        console.log("list[i].id: ", list[i].id)
-        console.log("id: ", id)
-        console.log("list[i].sex", list[i].sex)
-        console.log("sex: ", sex)
         if (list[i].id === id && list[i].sex === sex) {
             return true;
         }
@@ -126,8 +127,6 @@ function containsObject(id, list, sex) {
 
 exports.unlock = (req, res) => {
     let skillsArray = req.body
-
-    console.log(skillsArray)
 
     //NOTES
     //this one kind of works, would have to pass all the exercises back from front end with exercises unlocked and updated
@@ -140,7 +139,7 @@ exports.unlock = (req, res) => {
         }
     
         res.json({
-            message: raw
+            skillsArray: skillsArray
         })
     })
 }
