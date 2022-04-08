@@ -1,28 +1,32 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is the api for a fullstack MERN app. This\r  webapp allows a user to track what calisthenics skills they\r have been able to achieve or accomplish. The inspiration comes\r from a map of \"100 Places to go Before I DIe\" in which you can\r scratch off a gray layer of a certain place, revealing a cool\r little design underneath. This is meant to be a virtual way\r to do that but for calisthenics skills. I hope to eventually\r expand it from calisthenics to all strength feats.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dvent1123/calisthenics-tracker-api.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dvent1123/calisthenics-tracker-api/issues"
+  },
+  "homepage": "https://github.com/Dvent1123/calisthenics-tracker-api#readme",
   "dependencies": {
-    "@sendgrid/mail": "^7.4.2",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.19.1",
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-jwt": "^6.0.0",
-    "express-validator": "^6.10.0",
-    "google-auth-library": "^7.0.3",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "express-jwt": "^6.1.0",
+    "express-validator": "^6.14.0",
+    "google-auth-library": "^7.11.0",
     "jsonwebtoken": "^8.5.1",
-    "mailgun-js": "^0.22.0",
-    "mongoose": "^5.12.3",
+    "mongoose": "^6.2.0",
     "morgan": "^1.10.0",
-    "nodemailer": "^6.5.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.15"
   }
 }

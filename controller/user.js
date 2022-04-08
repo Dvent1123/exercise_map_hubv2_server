@@ -18,8 +18,7 @@ exports.read = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    const { name, password } = req.body
-    console.log(req.user)
+    const { name, password, weight, sex } = req.body
 
     User.findOne({ _id: req.user._id}, (err, user) => {
         if(err || !user) {
@@ -34,12 +33,28 @@ exports.update = (req, res) => {
         } else {
             user.name = name
         }
+        if(!weight) {
+            return res.status(400).json({
+                error: 'These fields are required'
+            })
+        } else {
+            user.weight = weight
+        }
+        if(!sex) {
+            return res.status(400).json({
+                error: 'These fields are required'
+            })
+        } else {
+            user.sex = sex
+        }
         if(password) {
             if(password.length < 6) {
                 return res.status(400).json({
                     error: 'Password should be minimum 6 characters long'
                 })
             } else {
+                // Virtual takes password and passes it through
+                // functions
                 user.password = password
             }
         }
@@ -51,8 +66,6 @@ exports.update = (req, res) => {
                     error: 'User update failed'
                 })
             }
-            updatedUser.hashed_password = undefined
-            updatedUser.salt = undefined
             res.json(updatedUser)
         })
     })
