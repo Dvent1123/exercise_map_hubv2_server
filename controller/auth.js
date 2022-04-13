@@ -8,7 +8,7 @@ let dataModule = require('../data/data')
 
 exports.signup = (req, res) => {
     console.log('REQ BODY ON SIGNUP', req.body)
-    const { name, email, password } = req.body
+    const { name, email, password, sex, weight } = req.body
     const exercises = dataModule.exerciseData
 
     User.findOne({ email: email }).exec((err, user) => {
@@ -24,7 +24,7 @@ exports.signup = (req, res) => {
         }
     })
 
-    let newUser = new User({name, email, password, exercises})
+    let newUser = new User({name, email, password, exercises, weight, sex})
 
     newUser.save((err, data) => {
         console.log('it makes it to the user')
