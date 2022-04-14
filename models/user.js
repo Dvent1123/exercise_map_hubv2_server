@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
     typeOfAthlete: {
         type: String,
         required: true,
-        default: "power"
+        default: "cali"
     },
     weight: {
         type: Number,
